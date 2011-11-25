@@ -1,0 +1,4 @@
+Log file created at: 2011/11/19 16:54:10
+Running on machine: thomas-Latitude-E4200
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+E1119 16:54:10.837790  3109 main.cpp:15] Thomas logging_2
