@@ -61,7 +61,7 @@ class Signals
                StackTrace();
             break;
             default:
-	            std::cout << "\n(Unknown signal) Terminating...\n";
+	       std::cout << "\n(Unknown signal) Terminating...\n";
                StackTrace();
          }
          std::cout << "More about signals, http://www.cplusplus.com/reference/clibrary/csignal/signal\n";
