@@ -2,8 +2,8 @@
 /*! \brief A dummy class to handle threads, for test purpose only.
  */
 
-#ifndef FOO_H_
-#define FOO_H_
+#ifndef TL_FOO_H_
+#define TL_FOO_H_
 
 #include <iostream>
 

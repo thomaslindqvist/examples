@@ -77,7 +77,8 @@ int main()
    Foo f;
    std::thread t(f);
    t.join();
-   //test1();
+
+   test1();
    test2();
    return 1;    
 }

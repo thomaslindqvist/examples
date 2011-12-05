@@ -1,15 +1,17 @@
 EXECUTABLE = app
 CC = g++
-CFLAGS = -Wall -O0
-COMPILE = $(CC) $(CFLAGS) -c -g
+CFLAGS = -Wall -O0 -std=c++0x
+INCLUDES := -I. -I../stackTrace
+COMPILE = $(CC) $(INCLUDES) $(CFLAGS) -c -g
 OBJFILES := $(patsubst %.cpp,%.o,$(wildcard *.cpp))
+LDFLAGS = -rdynamic
 
 all: $(OBJFILES)
-	$(CC) -o $(EXECUTABLE) $(OBJFILES)
-
+	$(CC) -o $(EXECUTABLE) $(OBJFILES) $(LDFLAGS)
+ 
 
 $(EXECUTABLE): $(OBJFILES)
-	$(CC) -o $(EXECUTABLE) $(OBJFILES)
+	$(CC) -o $(EXECUTABLE) $(OBJFILES) $(LDFLAGS)
 
 
 %.o: %.cpp
