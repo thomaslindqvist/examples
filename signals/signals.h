@@ -1,15 +1,28 @@
 #ifndef TL_SIGNALS_H_
 #define TL_SIGNALS_H_
 
+/**	@brief This class is used for handle signals sent by the
+ *  operating system when a serious error uccured i.e dived by zero
+ *  or CTRL C command.
+
+    This source is free to use without any limitations.
+    @author Thomas Lindqvist
+*/
+
 #include <signal.h>
 #include "stacktrace.h"
 
 class Signals
 {
    public:
+   
+      /** Enable all signals 
+       *  Signal types: SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM
+       *  @param None.
+       *  @return None.
+       */
       static void enableAll()
       {
-         enable(SIGABRT);
          enable(SIGABRT);
          enable(SIGFPE);
          enable(SIGILL);
@@ -18,21 +31,42 @@ class Signals
          enable(SIGTERM);
       };
 
+      /** Enable a signal
+       *  Signal types: SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM
+       *  @param Signal type.
+       *  @return None.
+       */
       static void enable(const int signalType)
       {
          signal (signalType, terminate);
       };
 
+      /** Ignore a signal
+       *  Signal types: SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM
+       *  @param Signal type.
+       *  @return None.
+       */
       static void ignore(const int signalType)
       {
          signal (signalType, SIG_IGN);
       };
 
+      /** Disable a signal, means that you set it back
+       *  to the default behaviour.
+       *  Signal types: SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM
+       *  @param Signal type.
+       *  @return None.
+       */
       static void disable(const int signalType)
       {
          signal (signalType, SIG_DFL);
       };
-
+      
+      /** Handle a raised signal that is enabled.
+       *  Signal types: SIGABRT, SIGFPE, SIGILL, SIGINT, SIGSEGV, SIGTERM
+       *  @param Signal type.
+       *  @return None.
+       */
       static void terminate(const int signalType) 
       {
          switch(signalType)
