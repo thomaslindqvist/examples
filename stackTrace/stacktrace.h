@@ -1,25 +1,50 @@
-#ifndef STACKTRACE_H_
-#define STACKTRACE_H_
+#ifndef TL_STACKTRACE_H_
+#define TL_STACKTRACE_H_
+
+/** @brief This class is used for print the call stack.
+ *  Can be used when an application receive a signal from
+ *  the operating system i.e. SIGTERM.
+ *  
+
+    This source is free to use without any limitations.
+    @author Thomas Lindqvist
+*/
 
 #include <execinfo.h>
 #include <iostream>
 
 class StackTrace
 {
-   public: 
+   public:
+   
+     /** Default constructor 
+      *  The call stack length is set to 10
+      *  @param None.
+      *  @return None.
+      */
       StackTrace()
       :nTrace(10)
       {
          print();
       };
 
-      StackTrace(unsigned int trace)
-      :nTrace(trace)
+     /** Constructor 
+      *  The call stack length is set in the argument length. 
+      *  @param length number of calls in the call stack
+      *  @return None.
+      */
+      StackTrace(unsigned int length)
+      :nTrace(length)
       {
          print();
       };      
       
-       void print()
+     /** Constructor 
+      *  Print the call stack. 
+      *  @param None.
+      *  @return None.
+      */
+      void print()
       {
           //Number of steps to trace
           //const int nTrace = 10;
@@ -34,6 +59,7 @@ http://stackoverflow.com/questions/77005/how-to-generate-a-stacktrace-when-my-gc
       }
 
    private:
+      /** Store how many traces that will be printed. */ 
       const unsigned int nTrace; 
 };
 
