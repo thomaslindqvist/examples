@@ -1,7 +1,7 @@
 #ifndef TL_SIGNALS_H_
 #define TL_SIGNALS_H_
 
-/**	@brief This class is used for handle signals sent by the
+/** @brief This class is used for handle signals sent by the
  *  operating system when a serious error uccured i.e dived by zero
  *  or CTRL C command.
 
