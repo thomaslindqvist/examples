@@ -42,7 +42,7 @@ class Signals
                StackTrace();
             break;
             case SIGFPE:
-	            std::cout << "\n(Signal Floating-Point Exception) Erroneous arithmetic operation, such as zero divide.\n";
+	       std::cout << "\n(Signal Floating-Point Exception) Erroneous arithmetic operation, such as zero divide.\n";
                StackTrace();
             break;
             case SIGILL:
