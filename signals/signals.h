@@ -101,7 +101,7 @@ class Signals
          std::cout << "More about signals, http://www.cplusplus.com/reference/clibrary/csignal/signal\n";
          
          //Shutdown after rececived a signal
-         exit(1);
+         exit(0);
       };
 };
 #endif
