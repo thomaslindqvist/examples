@@ -11,6 +11,7 @@
 
 #include <signal.h>
 #include "stacktrace.h"
+#include <glog/logging.h>
 
 class Signals
 {
@@ -72,33 +73,33 @@ class Signals
          switch(signalType)
          {
             case SIGABRT:
-               std::cout << "\n(Signal Abort) Abnormal termination, such as is initiated by the abort function.\n";
-               StackTrace();
+               LOG(ERROR) << "(Signal Abort) Abnormal termination, such as is initiated by the abort function.";
+               StackTrace(10,2);
             break;
             case SIGFPE:
-	       std::cout << "\n(Signal Floating-Point Exception) Erroneous arithmetic operation, such as zero divide.\n";
-               StackTrace();
+	            LOG(ERROR) << "(Signal Floating-Point Exception) Erroneous arithmetic operation, such as zero divide.";
+               StackTrace(10,2);
             break;
             case SIGILL:
-               std::cout << "\n(Signal Illegal Instruction) Invalid function image, such as an illegal instruction.\n";
-               StackTrace();
+               LOG(ERROR) << "(Signal Illegal Instruction) Invalid function image, such as an illegal instruction.";
+               StackTrace(10,2);
             break;      
             case SIGINT:
-               std::cout << "\n(Signal Interrupt) Interactive attention signal.\n";
+               LOG(ERROR) << "(Signal Interrupt) Interactive attention signal.";
             break;            
             case SIGSEGV:
-               std::cout << "\n(Signal Segmentation Violation) Invalid access to storage.\n";
-               StackTrace();
+               LOG(ERROR) << "(Signal Segmentation Violation) Invalid access to storage.";
+               StackTrace(10,2);
             break;         
             case SIGTERM:
-               std::cout << "\n(Signal Terminate) Termination request sent to program.\n";
-               StackTrace();
+               LOG(ERROR) << "(Signal Terminate) Termination request sent to program.";
+               StackTrace(10,2);
             break;
             default:
-	       std::cout << "\n(Unknown signal) Terminating...\n";
-               StackTrace();
+	            LOG(ERROR) << "(Unknown signal) Terminating...";
+               StackTrace(10,2);
          }
-         std::cout << "More about signals, http://www.cplusplus.com/reference/clibrary/csignal/signal\n";
+         LOG(ERROR) << "More about signals, http://www.cplusplus.com/reference/clibrary/csignal/signal\n";
          
          //Shutdown after rececived a signal
          exit(0);

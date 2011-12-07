@@ -1,7 +1,7 @@
 #ifndef TL_STACKTRACE_H_
 #define TL_STACKTRACE_H_
 
-/** @brief This class is used for print the call stack.
+/** \brief This class is used for print the call stack.
  *  Can be used when an application receive a signal from
  *  the operating system i.e. SIGTERM.
  *  
@@ -11,7 +11,8 @@
 */
 
 #include <execinfo.h>
-#include <iostream>
+#include <glog/logging.h>
+#include <vector>
 
 class StackTrace
 {
@@ -23,44 +24,69 @@ class StackTrace
       *  @return None.
       */
       StackTrace()
-      :nTrace(10)
+      :m_nTrace(10)
+      ,m_offset(0)
       {
          print();
-      };
+      }
 
      /** Constructor 
       *  The call stack length is set in the argument length. 
-      *  @param length number of calls in the call stack
+      *  @param length number of traces in the call stack
       *  @return None.
       */
       StackTrace(unsigned int length)
-      :nTrace(length)
+      :m_nTrace(length)
+      ,m_offset(0)
       {
          print();
-      };      
-      
+      }
+
      /** Constructor 
-      *  Print the call stack. 
+      *  The call stack length is set in the argument length. 
+      *  @param length number of traces in the call stack
+      *  @param offset position from begining of the call stack 
+      *  @return None.
+      */
+      StackTrace(unsigned int length, unsigned int offset)
+      :m_nTrace(length)
+      ,m_offset(offset)
+      {
+         print();
+      }      
+      
+   private:
+     /** Print the call stack. 
       *  @param None.
       *  @return None.
       */
       void print()
-      {
-          //Number of steps to trace
-          //const int nTrace = 10;
-          void *array[nTrace];
+      {  
+          std::vector<void*> array(m_nTrace);
 
-	  //ToDo log to glog
-http://stackoverflow.com/questions/77005/how-to-generate-a-stacktrace-when-my-gcc-c-app-crashes
+          //Actual number of traces can be less then nTrace
+          int nSize = backtrace(array.data(), m_nTrace);
+          
+          if(nSize != 0)
+          {          
+            //Pointer to trace information 
+            char** symbols = backtrace_symbols(array.data(), nSize);
 
-          // print out all the frames to stderr or stdout
-          std::cout << "\nStackTrace:\n";
-          backtrace_symbols_fd(array, backtrace(array, nTrace), 1); //0=stdin, 1=stdout, 2=stderr
+            LOG(ERROR) << "StackTrace:";
+
+            //Start from 2, constructor and print is removed from output
+            for(unsigned int i = 2 + m_offset; i < nSize-1; i++)
+            {
+               LOG(ERROR)  << *(symbols+i);
+            }
+         }
       }
+      
+      /** Number of traces that will be printed. */ 
+      const unsigned int m_nTrace;
 
-   private:
-      /** Store how many traces that will be printed. */ 
-      const unsigned int nTrace; 
+      /** Offset from begining of the call stack. */
+      const unsigned int m_offset; 
 };
 
 #endif
