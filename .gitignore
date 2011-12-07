@@ -1,0 +1,7 @@
+#Ignore files
+*~
+*.o
+app
+
+#Ignore directories
+doxygen/
