@@ -99,7 +99,6 @@ class Signals
 	            LOG(ERROR) << "(Unknown signal) Terminating...";
                StackTrace(10,2);
          }
-         LOG(ERROR) << "More about signals, http://www.cplusplus.com/reference/clibrary/csignal/signal\n";
          
          //Shutdown after rececived a signal
          exit(0);

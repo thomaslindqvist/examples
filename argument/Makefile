@@ -1,7 +1,7 @@
 EXECUTABLE = app
 CC = g++
 CFLAGS = -Wall -O0 -std=c++0x
-INCLUDES := -I. -I../stackTrace -I../signals -I../argument
+INCLUDES := -I. -I../stackTrace -I../signals
 COMPILE = $(CC) $(INCLUDES) $(CFLAGS) -c -g
 OBJFILES := $(patsubst %.cpp,%.o,$(wildcard *.cpp))
 LDFLAGS = -rdynamic -lglog
