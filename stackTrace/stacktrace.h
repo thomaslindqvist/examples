@@ -72,8 +72,6 @@ class StackTrace
             //Pointer to trace information 
             char** symbols = backtrace_symbols(array.data(), nSize);
 
-            LOG(ERROR) << "StackTrace:";
-
             //Start from 2, constructor and print is removed from output
             for(unsigned int i = 2 + m_offset; i < nSize-1; i++)
             {
