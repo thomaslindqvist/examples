@@ -11,17 +11,22 @@ int main(int argc, char* argv[])
 
       //Parse arguments in argv
       Argument args;
-      args.parse(argc, argv);
-
-      //Handle signals
-      Signals::enableAll();
-      
-      while(true)
+      if(args.parse(argc, argv))
       {
-      
-      }
+         //Handle signals
+         Signals::enableAll();
+         
+         while(true)
+         {
+         
+         }
 
-      return 1;
+         return 1;
+      }
+      else
+      {
+         return 0;   
+      }
    }
    
    catch(std::exception e)
